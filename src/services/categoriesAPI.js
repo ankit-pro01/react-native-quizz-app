@@ -6,7 +6,6 @@ import {
   doc,
   deleteDoc,
 } from 'firebase/firestore';
-import uuid from 'react-native-uuid';
 import {db} from '../firestore/config';
 
 const getAllCategories = async () => {
@@ -33,7 +32,6 @@ const addNewCategory = async categoryName => {
       return {data: null, err: 'Category Allready Exists'};
     }
     const docRef = await addDoc(collection(db, 'categories'), {
-      id: uuid.v4(),
       name: categoryName,
     });
     return {data: true, err: ''};
