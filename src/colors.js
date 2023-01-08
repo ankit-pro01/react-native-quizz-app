@@ -1,0 +1,18 @@
+const PRIMARY_COLOR = '#14397d';
+const SECONDARY_COLOR = '#77b5d9';
+const TERTIARY_COLOR = '#d7eaf3';
+
+const ERROR_COLOR = '#FF5C5C';
+const SUCCESS_COLOR = 'lightgreen';
+const SELECT_COLOR = PRIMARY_COLOR;
+const WHITE_COLOR = 'ghostwhite';
+
+export {
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  TERTIARY_COLOR,
+  ERROR_COLOR,
+  SUCCESS_COLOR,
+  SELECT_COLOR,
+  WHITE_COLOR,
+};

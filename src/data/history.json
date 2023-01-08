@@ -1,0 +1,45 @@
+{
+  "questions": [
+    {
+      "category": "History",
+      "question": "Who was the founder of Haryark Dynasty?",
+      "options": ["Shishupal", "Bimbsar", "Ajatashatru", "Udiyan"],
+      "correctAnswer": "Bimbsar"
+    },
+    {
+      "category": "History",
+      "question": "Who was the first foreigner who invaded India?",
+      "options": ["Derious ", "Sikandar", "Selyucus", "Philip"],
+      "correctAnswer": "Derious"
+    },
+    {
+      "category": "History",
+      "question": "Who fought the war of Jhelum?",
+      "options": [
+        "Ameer and Sikandar",
+        "Porash and Sikandar",
+        "Yodhey and Sikandar",
+        "Ghananand and Sikandar"
+      ],
+      "correctAnswer": "Porash and Sikandar"
+    },
+    {
+      "category": "History",
+      "question": "What was the name of Goutam Buddha’s mother?",
+      "options": ["Goutami", "Mahamaya", "Yashodhara", "Chelna"],
+      "correctAnswer": "Mahamaya"
+    },
+    {
+      "category": "History",
+      "question": "What was the symbol of first Teerthankar Rishabhdeva?",
+      "options": ["Elephant", "Bull", "Lion", "Blue lotus"],
+      "correctAnswer": "Bull"
+    },
+    {
+      "category": "History",
+      "question": "Which Mourya Ruler is also known as 'Amitraghat'?",
+      "options": ["Chandragupta", "Bindusar", "Ashok", "Dashrath"],
+      "correctAnswer": "Bindusar"
+    }
+  ]
+}

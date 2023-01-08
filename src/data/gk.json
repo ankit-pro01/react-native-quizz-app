@@ -1,0 +1,55 @@
+{
+  "questions": [
+    {
+      "category": "GK",
+      "question": "Which rocks is transformed into marble?",
+      "options": ["Limestone", "Black stone", "Red stone", "Grenite"],
+      "correctAnswer": "Limestone"
+    },
+    {
+      "category": "GK",
+      "question": "Which Englishmen was fellow of Gandhiji in South Africa?",
+      "options": ["John delton", "Washington", "Polak", "Trumph"],
+      "correctAnswer": "Polak"
+    },
+    {
+      "category": "GK",
+      "question": "By which number the quality of gasoline sample is determined?",
+      "options": [
+        "By its octane number",
+        "Iodine Value",
+        "Cetaine Number",
+        "Mass density"
+      ],
+      "correctAnswer": "By its octane number"
+    },
+    {
+      "category": "GK",
+      "question": "Who appoints the Chief Election Commissioner of India?",
+      "options": [
+        "Prime Minister",
+        "Deputy Minister",
+        "President",
+        "Chief Minister"
+      ],
+      "correctAnswer": "President"
+    },
+    {
+      "category": "GK",
+      "question": "A temperature at which both the Fahrenheit and the centigrade scales have the same value?",
+      "options": ["10 degree", "20 degree", "-40 degree", "40 degree"],
+      "correctAnswer": "-40 degree"
+    },
+    {
+      "category": "GK",
+      "question": "Where is the Sargasso sea located?",
+      "options": [
+        "North Atlantic Ocean",
+        "South Atlantic Ocean",
+        "Pacific Ocean",
+        "Indian Ocean"
+      ],
+      "correctAnswer": "North Atlantic Ocean"
+    }
+  ]
+}

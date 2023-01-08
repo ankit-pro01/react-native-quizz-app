@@ -1,0 +1,65 @@
+{
+  "questions": [
+    {
+      "category": "Economics",
+      "question": "Electricity, gas and water supply comes under which sector?",
+      "options": [
+        "Primary sector",
+        "Secondary sector",
+        "Tertiary sector",
+        "None of these"
+      ],
+      "correctAnswer": "Secondary sector"
+    },
+    {
+      "category": "Economics",
+      "question": " Short-term finance is usually for a period ranging up to?",
+      "options": ["5 months", "10 months", "12 months", "8 months"],
+      "correctAnswer": "12 months"
+    },
+    {
+      "category": "Economics",
+      "question": "National expenditure includes?",
+      "options": [
+        "consumption expenditure",
+        "investment expenditure",
+        "government expenditure",
+        "All of the above"
+      ],
+      "correctAnswer": "All of the above"
+    },
+    {
+      "category": "Economics",
+      "question": "What is the means of subsidies?",
+      "options": [
+        "payment by government for purchase of goods and services",
+        "payment made by business enterprises to factors of production",
+        "payment made by companies to shareholders",
+        "payment made by the government to business enterprises, without buying any goods and services"
+      ],
+      "correctAnswer": "payment made by the government to business enterprises, without buying any goods and services"
+    },
+    {
+      "category": "Economics",
+      "question": "The Economic development depends on?",
+      "options": [
+        "Natural resources",
+        "Capital formation",
+        "Size of the market",
+        "All of these"
+      ],
+      "correctAnswer": "All of these"
+    },
+    {
+      "category": "Economics",
+      "question": "The study of factor pricing is alternatively called the theory of?",
+      "options": [
+        "functional distribution",
+        "personal distribution",
+        "Income distribution",
+        "wealth distribution"
+      ],
+      "correctAnswer": "functional distribution"
+    }
+  ]
+}

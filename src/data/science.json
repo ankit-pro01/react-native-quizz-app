@@ -1,0 +1,50 @@
+{
+  "questions": [
+    {
+      "category": "Science",
+      "question": "In which unit is the thickness of the stratospheric ozone gas layer measured?",
+      "options": ["Caverts", "Dobson unit", "Melsen Unit", "None of these"],
+      "correctAnswer": "Dobson unit"
+    },
+    {
+      "category": "Science",
+      "question": "Which of the following is not a traditional source of energy?",
+      "options": ["Natural Gas", "Mineral Oil", "Geothermal energy", "Coal"],
+      "correctAnswer": "Geothermal energy"
+    },
+    {
+      "category": "Science",
+      "question": "Which of the following is known as the suicide sac of the cell?",
+      "options": ["Lysozyme", "golgibody", "ribosome", "None of these"],
+      "correctAnswer": "Lysozyme"
+    },
+    {
+      "category": "Science",
+      "question": "Nichrome metal element is used in electric heaters, because?",
+      "options": [
+        "It has high resistivity",
+        "Its melting point is high",
+        "More powerful current can be flow in it",
+        "For all the above reasons"
+      ],
+      "correctAnswer": "For all the above reasons"
+    },
+    {
+      "category": "Science",
+      "question": "The main ingredient of 'Bio Gas' is?",
+      "options": ["ethane", "Ammonia", "Ethylene", "Methane"],
+      "correctAnswer": "Methane"
+    },
+    {
+      "category": "Science",
+      "question": "Gases of the same volume at the same temperature and pressure have the same number of molecules.Which of the following is this rule?",
+      "options": [
+        "Boyle's law",
+        "Charles's law",
+        "Volume rules of Gelusak",
+        "Rule of Avogadro's hypothesis"
+      ],
+      "correctAnswer": "Rule of Avogadro's hypothesis"
+    }
+  ]
+}
