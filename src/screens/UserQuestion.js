@@ -71,7 +71,7 @@ const UserQuestion = ({navigation, route}) => {
 
   return (
     <Layout>
-      <AppHeader title={item} />
+      <AppHeader navigation={navigation} title={item} />
       {loading && (
         <View
           style={{

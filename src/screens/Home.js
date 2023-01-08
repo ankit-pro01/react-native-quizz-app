@@ -36,7 +36,7 @@ const Home = ({navigation, route}) => {
 
   return (
     <Layout>
-      <AppHeader title="SELECT CATEGORY" />
+      <AppHeader navigation={navigation} title="SELECT CATEGORY" />
       {loading ? (
         <View
           style={{

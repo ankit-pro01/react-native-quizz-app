@@ -8,7 +8,7 @@ const Category = ({navigation, route}) => {
   const {item, catRefID} = route?.params;
   return (
     <Layout>
-      <AppHeader title={item} />
+      <AppHeader navigation={navigation} title={item} />
       <View style={{flex: 8, justifyContent: 'center'}}>
         <View>
           <PrimaryButton

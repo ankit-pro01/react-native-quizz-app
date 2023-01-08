@@ -1,4 +1,4 @@
-import {StyleSheet, View, TextInput, Image} from 'react-native';
+import {StyleSheet, View, TextInput, Image, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import {
   ERROR_COLOR,
@@ -11,8 +11,7 @@ import Avatar from '../../assets/avatar2.png';
 import {errorToast, hideMessage, successToast} from '../hooks/RNFunctions';
 import {Layout} from '../components/Layout/Layout';
 import {AppHeader} from '../components/Header/Header';
-import {PrimaryButton} from '../components/Button/PrimaryButton';
-import {addNewCategory, upDateCategory} from '../services/categoriesAPI';
+import {addNewCategory, deleteCategory} from '../services/categoriesAPI';
 import {ActivityIndicator} from 'react-native-paper';
 
 const EditCategory = ({navigation, route}) => {
@@ -30,31 +29,29 @@ const EditCategory = ({navigation, route}) => {
     }
   };
 
-  const editHandler = () => {
-    if (validateCategory) {
-      setLoading(true);
-      upDateCategory(catRefID, categoryName, item)
-        .then(res => {
-          setLoading(false);
-          if (!res?.err) {
-            successToast('SUCCESS', 'CATEGORY SUCESSFULLY EDITED');
-            navigation.navigate('Home', {
-              type: 'Admin',
-            });
-          } else {
-            errorToast('ERROR', 'UNABLE TO EDIT CATEGORY');
-            setError(true);
-          }
-        })
-        .catch(err => {
-          setLoading(false);
+  const deleteHandler = () => {
+    setLoading(true);
+    deleteCategory(catRefID)
+      .then(res => {
+        setLoading(false);
+        if (!res?.err) {
+          successToast(
+            'SUCCESS',
+            `${categoryName?.toUpperCase()} CATEGORY SUCESSFULLY DELETED`,
+          );
+          navigation.navigate('Home', {
+            type: 'Admin',
+          });
+        } else {
+          errorToast('ERROR', 'UNABLE TO DELETE CATEGORY');
           setError(true);
-          errorToast('ERROR', 'UNABLE TO EDIT CATEGORY');
-        });
-    } else {
-      errorToast('ERROR', 'UNABLE TO EDIT CATEGORY');
-      setError(true);
-    }
+        }
+      })
+      .catch(err => {
+        setLoading(false);
+        setError(true);
+        errorToast('ERROR', 'UNABLE TO DELETE CATEGORY');
+      });
   };
 
   const addNewHandler = () => {
@@ -63,13 +60,17 @@ const EditCategory = ({navigation, route}) => {
       addNewCategory(categoryName)
         .then(res => {
           setLoading(false);
-          if (!res?.err) {
-            successToast('SUCCESS', 'CATEGORY SUCESSFULLY EDITED');
+          if (!res?.err && res?.data) {
+            successToast(
+              'SUCCESS',
+              `${categoryName?.toUpperCase()} CATEGORY SUCESSFULLY ADDED`,
+            );
             navigation.navigate('Home', {
               type: 'Admin',
+              userName: '',
             });
           } else {
-            errorToast('ERROR', 'UNABLE TO EDIT CATEGORY');
+            errorToast('ERROR', `${res?.err}`);
             setError(true);
           }
         })
@@ -80,7 +81,6 @@ const EditCategory = ({navigation, route}) => {
         });
     } else {
       setLoading(false);
-
       errorToast('ERROR', 'UNABLE TO EDIT CATEGORY');
       setError(true);
     }
@@ -88,48 +88,59 @@ const EditCategory = ({navigation, route}) => {
 
   return (
     <Layout>
-      <AppHeader title={`Add & EDIT CATEGORY (${item})`} />
-      <View style={{flex: 7, justifyContent: 'center'}}>
-        <View
-          style={{
-            backgroundColor: error ? ERROR_COLOR : WHITE_COLOR,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginVertical: '5%',
-            borderRadius: 50,
-            marginHorizontal: '10%',
-            borderColor: PRIMARY_COLOR,
-            borderWidth: 2,
-          }}>
-          <TextInput
-            style={{
-              fontSize: 24,
-              color: PRIMARY_COLOR,
-            }}
-            value={categoryName}
-            onChangeText={text => {
-              hideMessage();
-              setError(false);
-              setCategoryname(text);
-            }}
-            placeholder={'Enter Category Name'}
-            placeholderTextColor={'#D3d3d3'}
-          />
-        </View>
-        {loading ? (
-          <ActivityIndicator />
-        ) : (
-          <>
-            <PrimaryButton
-              label={`Edit Existing`}
-              onPressHandler={editHandler}
-            />
-            <SecondaryButton
-              label="Create New"
-              onPressHandler={addNewHandler}
-            />
-          </>
-        )}
+      <AppHeader navigation={navigation} title={`EDIT CATEGORY (${item})`} />
+      <View style={{height: '100%'}}>
+        <ScrollView>
+          {loading ? (
+            <ActivityIndicator />
+          ) : (
+            <>
+              <SecondaryButton
+                bgColor={ERROR_COLOR}
+                label={`Delete Category`}
+                onPressHandler={deleteHandler}
+              />
+              <View
+                style={{
+                  justifyContent: 'center',
+                  marginVertical: '10%',
+                  borderRadius: 50,
+                  height: 300,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: error ? ERROR_COLOR : WHITE_COLOR,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginVertical: '5%',
+                    borderRadius: 50,
+                    marginHorizontal: '10%',
+                    borderColor: PRIMARY_COLOR,
+                    borderWidth: 2,
+                  }}>
+                  <TextInput
+                    style={{
+                      fontSize: 24,
+                      color: PRIMARY_COLOR,
+                    }}
+                    value={categoryName}
+                    onChangeText={text => {
+                      hideMessage();
+                      setError(false);
+                      setCategoryname(text);
+                    }}
+                    placeholder={'Enter Category Name'}
+                    placeholderTextColor={'#D3d3d3'}
+                  />
+                </View>
+                <SecondaryButton
+                  label="Create New"
+                  onPressHandler={addNewHandler}
+                />
+              </View>
+            </>
+          )}
+        </ScrollView>
       </View>
     </Layout>
   );

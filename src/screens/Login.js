@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import {useIsFocused} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -19,6 +20,7 @@ import {
   WHITE_COLOR,
 } from '../colors';
 import {errorToast, hideMessage} from '../hooks/RNFunctions';
+import {getStoreData, setStoreData} from '../hooks/Storage';
 import {useTogglePasswordVisibility} from '../hooks/useTogglePasswordVisibility';
 import {validateUser} from '../services/usersAPI';
 
@@ -33,20 +35,34 @@ const Login = ({navigation}) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    console.log('called');
+    getStoreData('admin-login').then(res => {
+      if (res === 'admin') {
+        navigation.navigate('Home', {type: 'Admin'});
+      }
+    });
+  }, []);
+
   const validEmail = email => {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   };
 
   const handleLogin = () => {
-    navigation.navigate('Home', {type: 'Admin'});
-    return;
+    // navigation.navigate('Home', {type: 'Admin'});
     setError(false);
     setLoading(true);
     if (validEmail(userCredential?.email)) {
       validateUser(userCredential?.email, userCredential?.password)
         .then(res => {
           setLoading(false);
-          navigation.navigate('Home', {type: 'Admin'});
+          setStoreData('admin-login', 'admin')
+            .then(res => {
+              navigation.navigate('Home', {type: 'Admin'});
+            })
+            .catch(er => {
+              navigation.navigate('Home', {type: 'Admin'});
+            });
         })
         .catch(err => {
           setLoading(false);

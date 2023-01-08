@@ -1,5 +1,13 @@
-import {collection, getDocs, addDoc, setDoc, doc} from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  addDoc,
+  setDoc,
+  doc,
+  deleteDoc,
+} from 'firebase/firestore';
 import {db} from '../firestore/config';
+import {getStoreData, setStoreData} from '../hooks/Storage';
 
 const mappedCat = categoryName => {
   let collectionName = `${categoryName}-questions`;
@@ -7,6 +15,18 @@ const mappedCat = categoryName => {
     collectionName = `GK-questions`;
   }
   return collectionName;
+};
+
+const shuffleList = list => {
+  let shuffeldList = [...list];
+  try {
+    return shuffeldList
+      .map(value => ({value, sort: Math.random()}))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({value}) => value);
+  } catch (e) {
+    return shuffeldList;
+  }
 };
 
 //GET All Questions
@@ -19,7 +39,11 @@ const getQuestions = async categoryName => {
       const questionObj = doc.data();
       questionsList.push({...questionObj, _id: doc.id});
     });
-    return {data: questionsList, err: null};
+    questionsList;
+    setStoreData(`total-${collectionName}-questions`, +questionsList.length);
+    const newquestionsList = shuffleList(questionsList);
+    const filterdQues = newquestionsList.slice(0, 20);
+    return {data: filterdQues, err: null};
   } catch (err) {
     return {data: null, err: 'SOMETHING WENT WRONG'};
   }
@@ -28,6 +52,10 @@ const getQuestions = async categoryName => {
 //ADD new question
 const addnewQuestion = async (questionObj, categoryName) => {
   const collectionName = mappedCat(categoryName);
+  const value = getStoreData(`total-${collectionName}-questions`);
+  if (value > 30) {
+    return {data: null, err: 'LIMIT EXCEEDS : 30'};
+  }
   try {
     const docRef = await addDoc(collection(db, collectionName), questionObj);
     return {data: true, err: null};
@@ -52,15 +80,18 @@ const editQuestion = async (updatedQuestionObj, categoryName) => {
 
 //DELETE question
 const deleteQuestion = async (questionObj, categoryName) => {
-  const collectionName = mappedCat(categoryName);
-  const {_id} = questionObj;
-  if (_id) {
-    try {
-      const docRef = await collection(db, collectionName).doc(_id).delete();
+  try {
+    const collectionName = mappedCat(categoryName);
+    const {_id} = questionObj;
+    if (_id) {
+      const docRef = await deleteDoc(doc(db, collectionName, _id));
       return {data: true, err: null};
-    } catch (e) {
+    } else {
       return {data: null, err: 'SOMETHING WENT WRONG'};
     }
+  } catch (e) {
+    console.log('err1 -> ', e);
+    return {data: null, err: 'SOMETHING WENT WRONG'};
   }
 };
 

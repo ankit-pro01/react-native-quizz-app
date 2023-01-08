@@ -15,6 +15,7 @@ import {errorToast, infoToast, successToast} from '../hooks/RNFunctions';
 import {QuestionForm} from '../components/QuestionForm/QuestionForm';
 import {SecondaryButton} from '../components/Button/SecondaryButton';
 import {DialogBox} from '../components/Dialog/Dialog';
+import {SuccessToast} from 'react-native-toast-message';
 
 const EditQuestion = ({navigation, route}) => {
   const {item} = route?.params;
@@ -64,7 +65,7 @@ const EditQuestion = ({navigation, route}) => {
 
   return (
     <Layout>
-      <AppHeader title={'EDIT QUESTION'} />
+      <AppHeader navigation={navigation} title={'EDIT QUESTION'} />
       {loading ? (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <ActivityIndicator />
@@ -131,12 +132,13 @@ const EditQuestionExtend = ({navigation, question, item}) => {
 
   const handleDialog = () => {
     setLoading(true);
+    setShowDialog(false);
     deleteQuestion(question, item)
       .then(res => {
         setLoading(false);
         if (!res?.err) {
-          infoToast('SUCCESS', 'DELETED THE QUESTION');
-          navigator.navigation('Home', {
+          SuccessToast('SUCCESS', 'DELETED THE QUESTION');
+          navigation.navigate('Home', {
             item: item,
           });
         } else {
@@ -145,6 +147,7 @@ const EditQuestionExtend = ({navigation, question, item}) => {
       })
       .catch(er => {
         setLoading(false);
+        console.log('err ->', er);
         errorToast('ERROR', 'UNABLE TO DELETE THE QUESTION');
       });
   };
@@ -186,21 +189,23 @@ const EditQuestionExtend = ({navigation, question, item}) => {
         {loading ? (
           <ActivityIndicator />
         ) : (
-          <>
-            <SecondaryButton
-              bgColor={ERROR_COLOR}
-              label={'DELETE'}
-              onPressHandler={() => {
-                setShowDialog(true);
-              }}
-            />
-            <SecondaryButton
-              label={'UPDATE'}
-              onPressHandler={() => {
-                handleUpdateHandler();
-              }}
-            />
-          </>
+          !showDialog && (
+            <>
+              <SecondaryButton
+                bgColor={ERROR_COLOR}
+                label={'DELETE'}
+                onPressHandler={() => {
+                  setShowDialog(true);
+                }}
+              />
+              <SecondaryButton
+                label={'UPDATE'}
+                onPressHandler={() => {
+                  handleUpdateHandler();
+                }}
+              />
+            </>
+          )
         )}
       </View>
     </ScrollView>

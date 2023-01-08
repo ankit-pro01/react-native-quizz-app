@@ -5,7 +5,7 @@ import {PRIMARY_COLOR} from '../../colors';
 export const DialogBox = ({show, handleDialog, title, body}) => {
   return (
     <Provider>
-      <View>
+      <View style={{marginBottom: 30}}>
         <Portal>
           <Dialog
             style={{

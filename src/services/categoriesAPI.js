@@ -1,4 +1,11 @@
-import {collection, getDocs, addDoc, setDoc, doc} from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  addDoc,
+  setDoc,
+  doc,
+  deleteDoc,
+} from 'firebase/firestore';
 import uuid from 'react-native-uuid';
 import {db} from '../firestore/config';
 
@@ -18,34 +25,45 @@ const getAllCategories = async () => {
 
 const addNewCategory = async categoryName => {
   try {
-    getAllCategories().then(async res => {
-      const dataRef = res?.data?.filter(
-        cat => cat?.name?.tolowerCase() === categoryName?.toLowerCase(),
-      );
-      if (dataRef?.length) {
-        return {data: null, err: 'Category Allready Exists'};
-      } else {
-        const docRef = await addDoc(collection(db, 'categories'), {
-          id: uuid.v4(),
-          name: categoryName,
-        });
-        return {data: true, err: null};
-      }
+    const res = await getAllCategories();
+    const dataRef = res?.data?.filter(cat => {
+      return cat?.name?.toLowerCase() === categoryName?.toLowerCase();
     });
+    if (dataRef?.length > 0) {
+      return {data: null, err: 'Category Allready Exists'};
+    }
+    const docRef = await addDoc(collection(db, 'categories'), {
+      id: uuid.v4(),
+      name: categoryName,
+    });
+    return {data: true, err: ''};
   } catch (e) {
+    console.log('err', e);
     return {data: null, err: 'SOMETHING WENT WRONG'};
   }
 };
 
-const upDateCategory = async (docID, updatedName, prevName) => {
-  try {
-    await setDoc(doc(db, 'categories', docID), {name: updatedName});
+// const upDateCategory = async (docID, updatedName, prevName) => {
+//   try {
+//     await setDoc(doc(db, 'categories', docID), {name: updatedName});
 
-    return {data: true, err: null};
-  } catch (e) {
-    console.error('Error adding document: ', e);
-    return {data: null, err: 'SOMETHING WENT WRONG'};
+//     return {data: true, err: null};
+//   } catch (e) {
+//     console.error('Error adding document: ', e);
+//     return {data: null, err: 'SOMETHING WENT WRONG'};
+//   }
+// };
+
+const deleteCategory = async docID => {
+  if (docID) {
+    try {
+      const docRef = await deleteDoc(doc(db, 'categories', docID));
+      return {data: true, err: null};
+    } catch (e) {
+      console.log('err', e);
+      return {data: null, err: 'SOMETHING WENT WRONG'};
+    }
   }
 };
 
-export {addNewCategory, getAllCategories, upDateCategory};
+export {addNewCategory, getAllCategories, deleteCategory};

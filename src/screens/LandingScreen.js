@@ -29,7 +29,7 @@ const LandingScreen = ({navigation}) => {
             fontWeight: '800',
             color: WHITE_COLOR,
           }}>
-          QUIZZ APP
+          QUICK QUIZ
         </Text>
         <View
           style={{

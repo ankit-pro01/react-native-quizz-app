@@ -73,7 +73,7 @@ export const AddQuestion = ({navigation, route}) => {
             item: item,
           });
         } else {
-          errorToast('ERROR', 'Question is not added');
+          errorToast('ERROR', `Question is not added  ${res?.err || '!'} `);
         }
       });
     } else {
@@ -83,7 +83,7 @@ export const AddQuestion = ({navigation, route}) => {
 
   return (
     <Layout>
-      <AppHeader title="Add Question" />
+      <AppHeader navigation={navigation} title="Add Question" />
       <ScrollView style={{flex: 7}}>
         <QuestionForm
           newQuestion={{...newQuestion}}
