@@ -32,6 +32,14 @@ const Category = ({navigation, route}) => {
             onPressHandler={() => {
               navigation.navigate('EditCategory', {
                 item: item,
+              });
+            }}
+          />
+          <PrimaryButton
+            label={'Show Logs'}
+            onPressHandler={() => {
+              navigation.navigate('UserScoreLogs', {
+                item: item,
                 catRefID: catRefID,
               });
             }}

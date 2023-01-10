@@ -14,6 +14,9 @@ import {FallBackComponent} from '../components/FallbackComponent/FallBack';
 import {AppHeader} from '../components/Header/Header';
 import {Layout} from '../components/Layout/Layout';
 import {PRIMARY_COLOR, SUCCESS_COLOR, WHITE_COLOR} from '../colors';
+import {setStoreData} from '../hooks/Storage';
+import {addNewLog} from '../services/logsAPI';
+import {infoToast} from '../hooks/RNFunctions';
 
 const TOTAL_QUESTIONS = 6;
 
@@ -22,6 +25,7 @@ const UserQuestion = ({navigation, route}) => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [dataLog, setIsDataLog] = useState(true);
 
   const [isSubmit, setIsSubmit] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
@@ -34,11 +38,23 @@ const UserQuestion = ({navigation, route}) => {
   };
 
   const handleCancel = () => {
+    if (!dataLog) {
+      infoToast('INFO', 'NOT ABLE TO SUBMIT YOUR SCORE.');
+    }
     navigation.navigate('Home', {type: 'User', userName: userName});
   };
 
   const handleDialog = () => {
     setShowDialog(false);
+    addNewLog(userName, item, userScore)
+      .then(res => {
+        if (!res?.err) {
+          setIsDataLog(true);
+        }
+      })
+      .catch(er => {
+        infoToast('INFO', 'NOT ABLE TO SUBMIT YOUR SCORE.');
+      });
   };
 
   const getTitle = () => {

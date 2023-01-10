@@ -5,12 +5,7 @@ import {initializeApp} from 'firebase/app';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyADEd_kH5TPtKqFaMFQdBvY0WgYdubLUkg',
-  authDomain: 'quick-quiz-5d9b8.firebaseapp.com',
-  projectId: 'quick-quiz-5d9b8',
-  storageBucket: 'quick-quiz-5d9b8.appspot.com',
-  messagingSenderId: '1039332962454',
-  appId: '1:1039332962454:web:7b310d1eb4d23cf1ef12b7',
+  //new config
 };
 
 // Initialize Firebase

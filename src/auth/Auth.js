@@ -14,6 +14,7 @@ import UserQuestion from '../screens/UserQuestion';
 import {AddQuestion} from '../screens/AddQuestion';
 import EditQuestion from '../screens/EditQuestion';
 import EditCategory from '../screens/EditCategory';
+import {UserScoreLogs} from '../screens/UserScoreLogs';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,11 @@ function Auth() {
         <Stack.Screen
           name="EditCategory"
           component={EditCategory}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="UserScoreLogs"
+          component={UserScoreLogs}
           options={{headerShown: false}}
         />
         <Stack.Screen

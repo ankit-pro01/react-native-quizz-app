@@ -1,5 +1,5 @@
 import {StyleSheet, View, TextInput, Image} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ERROR_COLOR, PRIMARY_COLOR, WHITE_COLOR} from '../colors';
 import {SecondaryButton} from '../components/Button/SecondaryButton';
 import Avatar from '../../assets/avatar2.png';

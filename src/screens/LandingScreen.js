@@ -9,6 +9,7 @@ import {
 import {Layout} from '../components/Layout/Layout';
 import {PrimaryButton} from '../components/Button/PrimaryButton';
 import QuizImg from '../../assets/quiz.png';
+import {setStoreData} from '../hooks/Storage';
 
 const LandingScreen = ({navigation}) => {
   return (
@@ -57,7 +58,11 @@ const LandingScreen = ({navigation}) => {
         />
         <PrimaryButton
           label={'Guest'}
-          onPressHandler={() => navigation.navigate('UserLogin')}
+          onPressHandler={() => {
+            setStoreData('admin-login', 'user')
+              .then(res => navigation.navigate('UserLogin'))
+              .catch();
+          }}
         />
       </View>
     </Layout>

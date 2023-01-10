@@ -39,7 +39,6 @@ const getQuestions = async categoryName => {
       const questionObj = doc.data();
       questionsList.push({...questionObj, _id: doc.id});
     });
-    questionsList;
     setStoreData(`total-${collectionName}-questions`, +questionsList.length);
     const newquestionsList = shuffleList(questionsList);
     const filterdQues = newquestionsList.slice(0, 20);

@@ -1,4 +1,3 @@
-import {useIsFocused} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -11,7 +10,7 @@ import {
 } from 'react-native';
 import {ActivityIndicator, Divider} from 'react-native-paper';
 import {Card} from 'react-native-shadow-cards';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   ERROR_COLOR,
@@ -36,7 +35,6 @@ const Login = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log('called');
     getStoreData('admin-login').then(res => {
       if (res === 'admin') {
         navigation.navigate('Home', {type: 'Admin'});
@@ -49,7 +47,6 @@ const Login = ({navigation}) => {
   };
 
   const handleLogin = () => {
-    // navigation.navigate('Home', {type: 'Admin'});
     setError(false);
     setLoading(true);
     if (validEmail(userCredential?.email)) {
